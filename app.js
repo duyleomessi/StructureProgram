@@ -20,7 +20,7 @@ var secret = require('./config/secret');
 // Set up express
 app = express();
 app.set('view engine', 'pug');
-app.set('views', __dirname + '/views');
+app.set('views', __dirname + '/authentication/views');
 app.use('/static', express.static(__dirname + '/static'));
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -50,19 +50,11 @@ mongoose.connect(secret.dburl, function(err) {
 });
 
 // set up router
-var indexRoute = require('./controller/index');
-var itemRoute = require('./controller/item');
-var searchRoute = require('./controller/search');
-var userRoute = require('./controller/user');
-var cartRoute = require('./controller/cart');
-var paymentRoute = require('./controller/payment');
+var indexRoute = require('./authentication/controller/index');
+var userRoute = require('./authentication/controller/user');
 
-app.use('/', indexRoute);
-app.use('/item', itemRoute);
-app.use('/search', searchRoute);
+app.use('/', userRoute);
 app.use('/user', userRoute);
-app.use('/cart', cartRoute);
-app.use('/payment', paymentRoute);
 
 app.listen(secret.port, function() {
     console.log('server listen at port ', secret.port);

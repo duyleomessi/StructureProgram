@@ -1,11 +1,15 @@
 var express = require('express');
 var userRoute = express.Router();
 var passport = require('passport');
-var passportConf = require('../config/passport');
+var passportConf = require('../../config/passport');
 var async = require('async');
 
 var User = require('../models/user');
-var Cart = require('../models/cart');
+//var Cart = require('../models/cart');
+
+userRoute.get('/', function(req, res, next) {
+    res.redirect('/user/register');
+});
 
 userRoute.get('/register', function (req, res, next) {
     res.render('register');
@@ -13,8 +17,8 @@ userRoute.get('/register', function (req, res, next) {
 
 userRoute.post('/register', function (req, res, next) {
 
-    async.waterfall([
-        function (callback) {
+    // async.waterfall([
+    //     function (callback) {
             var newUser = new User({
                 email: req.body.email,
                 password: req.body.password
@@ -33,24 +37,25 @@ userRoute.post('/register', function (req, res, next) {
                         newUser.save(function (err, user) {
                             if (err) return next(err);
                             //res.json('Succefully create new user');
-                            callback(null, user);
+                            //callback(null, user);
+                            return res.redirect('/');
                         })
                     }
                 })
-        },
-        function (user) {
-            var cart = new Cart({
-                userId: user._id
-            });
-            cart.save(function (err) {
-                if (err) next(err);
-                req.logIn(user, function (err) {
-                    if (err) return next(err);
-                    return res.redirect('/');
-                })
-            });
-        }
-    ]);
+    //     },
+    //     function (user) {
+    //         var cart = new Cart({
+    //             userId: user._id
+    //         });
+    //         cart.save(function (err) {
+    //             if (err) next(err);
+    //             req.logIn(user, function (err) {
+    //                 if (err) return next(err);
+    //                 return res.redirect('/');
+    //             })
+    //         });
+    //     }
+    // ]);
 });
 
 userRoute.get('/login', function (req, res, next) {
