@@ -11,18 +11,18 @@ nav.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
         #bs-example-navbar-collapse-1.collapse.navbar-collapse
             ul.nav.navbar-nav
                 li
-                    a(href='/user/register') Sign Up
+                    a(href='http://localhost:8080/user/register') Sign Up
                 if (!user)
                     li
-                        a(href='/user/login') Login
+                        a(href='http://localhost:8080/user/login') Login
                 else
                     li
-                        a(href='/user//logout') Logout
+                        a(href='http://localhost:8080/user/logout') Logout
             .collapse.navbar-collapse
-                //- form.navbar-form.navbar-right(role='search', action='/search')
-                //-     .form-group
-                //-         input.form-control(type='text', name='query', placeholder='Search')
-                //-     |  
+                form.navbar-form.navbar-right(role='search', action='/search')
+                    .form-group
+                        input.form-control(type='text', name='query', placeholder='Search')
+                    |  
                     //- button.btn.btn-default(type='submit') Submit
                     |  
                     if (user)

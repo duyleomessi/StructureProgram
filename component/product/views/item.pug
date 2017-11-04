@@ -1,0 +1,102 @@
+extends includes/layout.pug
+
+block content
+    .row
+        // product item heading
+        .row
+            .col-sm-12
+                h1.page-header(style="margin-top: 0px") #{ item.title }
+                    small  #{item.slogan}
+
+        // product item row
+        .row
+            .col-sm-8
+                img.img-responsive(src="/static" + item.img_url)
+
+            .col-sm-4
+                h3 Product Description
+                .ratings(style="padding-left: 0")
+                    if reviews.length == 1
+                        p.pull-right #{ numReviews } review
+                    else
+                        p.pull-right #{ numReviews } reviews
+                    p
+                        - for(var i = 0; i < 6; i++)
+                            if stars > i
+                                span.glyphicon.glyphicon-star 
+                            else
+                                span.glyphicon.glyphicon-star-empty
+
+                p #{ item.description }
+
+                form(action="/cart/items/" + item._id, method ="post" )
+                    button.btn.btn-primary(type="submit") Add to cart
+                        span.glyphicon.glyphicon-chvron-right
+
+        // product reviews
+        .row
+            .col-sm-12
+                h3.page-header Latest reviews
+            .col-sm-12
+                each review in reviews
+                    div
+                        div
+                            h4.media-heading #{ review.name }
+                                small #{ review.date | date }
+                            div.ratings(style="padding-left: 0")
+                                - for(var i = 0; i < 6; i++)
+                                    if stars > i
+                                        span.glyphicon.glyphicon-star 
+                                    else
+                                        span.glyphicon.glyphicon-star-empty
+                            = review.comment
+
+                    hr
+
+                // comment form
+                .well
+                    h4 Add a review
+                    form(action="/item/" + item._id + "/reviews" method="post")
+                        .form-group
+                            label(for="review") Review:
+                            textarea.form-control(name="review" rows="3")
+                        .form-group
+                            label(for="name") Name:
+                            input.form-control(type='text' id='name' name='name' placeholder='Enter display name')
+                        .form-group
+                            label.radio-inline
+                            input#stars(type='radio', name='stars', value='1')
+                            |  1 star
+                            |  
+                            label.radio-inline
+                            input#stars(type='radio', name='stars', value='2')
+                            |  2 star
+                            |  
+                            label.radio-inline
+                            input#stars(type='radio', name='stars', value='3')
+                            |  3 star
+                            |  
+                            label.radio-inline
+                            input#stars(type='radio', name='stars', value='4')
+                            |  4 star
+                            |  
+                            label.radio-inline
+                            input#stars(type='radio', name='stars', value='5', checked='')
+                            |  5 star
+                        button.btn.btn-primary(type="submit") Submit Review
+                hr
+
+                // Related products row
+                .row
+                    .col-sm-12
+                        h3.page-header Related product
+                    each relatedItem in relatedItems
+                        .col-sm-3.col-xs-6
+                            a(href="/item/" + relatedItem._id )
+                                img.img-responsive.portfolio-item(src="/static" + relatedItem.img_url, alt="")
+block footer
+    hr
+    footer
+        .row
+            .col-sm-12
+                p Best Selling

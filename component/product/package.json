@@ -1,0 +1,27 @@
+{
+  "name": "sellingwebsite",
+  "version": "0.1.0",
+  "description": "Ecommerce app Using the MongoDB driver and Express",
+  "main": "product.js",
+  "dependencies": {
+    "async": "^2.1.4",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.15.2",
+    "connect-mongo": "^1.3.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "express-flash": "0.0.2",
+    "express-session": "^1.14.2",
+    "jquery": "^3.1.1",
+    "mongodb": "^2.2.11",
+    "mongoose": "^4.7.0",
+    "morgan": "^1.7.0",
+    "nunjucks": "^2.5.2",
+    "nunjucks-date": "^1.2.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "pug": "^2.0.0-beta6",
+    "serve-favicon": "^2.3.2",
+    "stripe": "^4.13.0"
+  }
+}

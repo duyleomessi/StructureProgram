@@ -1,0 +1,19 @@
+doctype html
+include header.pug
+
+body
+    include navbar.pug
+    .container
+        block breadcrumb
+
+        block content
+
+        block footer
+
+    script(src='/static/js/jquery.js')
+    script(src='/static/js/bootstrap.min.js')
+    script(src="/static/js/custom.js")
+    script(src="/static/js/loginjs.js")
+    script(src='/static/js/jquery.validate.min.js')
+    script(src='/static/js/validate.js')
+    //- script(src="https://js.stripe.com/v2/")

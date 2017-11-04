@@ -65,13 +65,13 @@ userRoute.get('/login', function (req, res, next) {
 
 userRoute.post('/login', passport.authenticate('local-login', {
     successRedirect: '/',
-    failureRedirect: '/user/login',
+    failureRedirect: 'http://localhost:8081/',
     failureFlash: true
 }));
 
 userRoute.get('/logout', function (req, res, next) {
     req.logout();
-    res.redirect('/');
+    res.redirect('http://localhost:8081/');
 });
 
 module.exports = userRoute;

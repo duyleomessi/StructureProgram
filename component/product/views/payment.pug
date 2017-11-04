@@ -1,0 +1,49 @@
+include includes/header
+
+body
+    .container
+        .row
+            .col-xs-12.col-sm-6.col-sm-offset-3
+                .panel.panel-default.credit-card-box
+                    .panel-heading.display-table(style="width: 100%")
+                        .row.display-tr
+                            h3.panel-title.display-td Payment Details
+                            .display-td
+                                img.img-responsive.pull-right(src='http://i76.imgup.net/accepted_c22e0.png')
+                    .panel-body
+                        form#payment-form(role='form', method='POST', action='/payment')
+                            input(type='hidden', name='stripeMoney', value=total)
+                            .row
+                                .col-xs-12
+                                    .form-group
+                                        label(for='cardNumber') CARD NUMBER
+                                        .input-group
+                                            input.form-control(type='tel', name='cardNumber', placeholder='Valid Card Number', autocomplete='cc-number', required='', autofocus='')
+                                            span.input-group-addon
+                                                i.fa.fa-credit-card
+                            .row
+                                .col-xs-7.col-sm-7
+                                    .form-group
+                                        label(for='cardExpiry')
+                                            span.hidden-xs EXPIRATION
+                                            span.visible-xs-inline EXP
+                                            |  DATE
+                                        |  
+                                        input.form-control(type='tel', name='cardExpiry', placeholder='MM / YY', autocomplete='cc-exp', required='')
+                                .col-xs-5.col-sm-5.pull-right
+                                    .form-group
+                                        label(for='cardCVC') CV CODE
+                                        |  
+                                        input.form-control(type='tel', name='cardCVC', placeholder='CVC', autocomplete='cc-csc', required='')
+                            .row
+                                .col-xs-12
+                                    .form-group
+                                        label(for='couponCode') COUPON CODE
+                                        |  
+                                        input.form-control(type='text', name='couponCode')
+                            .row
+                                .col-xs-12
+                                    button.subscribe.btn.btn-success.btn-lg.btn-block(type='submit') Take it (#{ total}$)
+                            .row(style='display:none;')
+                                .col-xs-12
+                                    p.payment-errors

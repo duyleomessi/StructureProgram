@@ -1,0 +1,39 @@
+extends includes/layout.pug
+
+block breadcrumb
+    .row
+        .col-sm-12
+            ol.breadcrumb
+                li
+                    a(href="/") Home
+                li Search                
+                li.active "#{queryString}"
+
+block content
+    .row
+        .col-sm-12
+            each item in items
+                .row
+                    .col-sm-7
+                        a(href="/item/" + item._id)
+                            img.img-responsive(src="/static" + item.img_url, alt="")
+                    .col-sm-5
+                        h3
+                            a(href="/item/" + item._id ) #{ item.title }
+                            h4 #{ item.slogan }
+                            p #{ item.description }
+                            a.btn.btn-primary(href="/item/" + item._id ) View Product 
+                                span.glyphicon.glyphicon-chevron-right  
+            .row.text-center
+                .col-sm-12
+                    ul.pagination
+                        - for(var i = 0; i < pages; i++) 
+                            if pages == i
+                                li.active
+                                    a(href="/search/?page=" + i + "&query=" + queryString) #{i + 1} 
+                            else
+                                li.inactive
+                                    a(href="/search/?page=" + i + "&query=" + queryString) #{i + 1}
+
+            div(style="text-align: center")
+                i #{ itemCount } Products

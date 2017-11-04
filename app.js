@@ -3,8 +3,6 @@ var fs = require('fs');
 
 var componentPath = path.join(__dirname, "component");
 fs.readdirSync(componentPath).forEach(function(dir) {
-    console.log("dir ", dir);
-    
     fs.readFile('./component/' + dir + '/package.json', 'utf8', function(err, data) {
         if(err) {
             console.log("Error while loading component!!!");
