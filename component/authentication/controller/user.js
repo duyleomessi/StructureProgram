@@ -1,7 +1,7 @@
 var express = require('express');
 var userRoute = express.Router();
 var passport = require('passport');
-var passportConf = require('../../config/passport');
+var passportConf = require('../../../config/passport');
 var async = require('async');
 
 var User = require('../models/user');

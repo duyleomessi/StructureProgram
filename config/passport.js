@@ -1,7 +1,7 @@
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
-var User = require('../authentication/models/user');
+var User = require('../component/authentication/models/user');
 
 // serialize and deserialize
 passport.serializeUser(function (user, done) {
