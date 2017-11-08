@@ -38,7 +38,7 @@ userRoute.post('/register', function (req, res, next) {
                             if (err) return next(err);
                             //res.json('Succefully create new user');
                             //callback(null, user);
-                            return res.redirect('/');
+                            return res.redirect('http://localhost:8081/');
                         })
                     }
                 })

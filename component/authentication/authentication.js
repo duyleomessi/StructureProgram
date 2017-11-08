@@ -12,6 +12,8 @@ var express = require('express'),
     MongoStore = require('connect-mongo')(session),
     passport = require('passport');
 
+
+
 var stripe = require('stripe')('sk_test_eBc69WlaOxykHBs34Rfqietx');
 
 
