@@ -52,7 +52,7 @@ mongoose.connect(secret.dburl, function(err) {
 });
 
 // set up router
-var indexRoute = require('./controller/index');
+
 var userRoute = require('./controller/user');
 
 app.use('/', userRoute);
