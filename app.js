@@ -1,37 +1,45 @@
 var path = require('path');
 var fs = require('fs');
+var util = require('util');
 var EventEmitter = require('events').EventEmitter;
 
 var componentPath = path.join(__dirname, "component");
 
-function findFile() {
-    var emitter = new EventEmitter();
+function FindFile() {
+    EventEmitter.call(this);
+}
+util.inherits(FindFile, EventEmitter);
+
+FindFile.prototype.findFile = function () {
+    var self = this;
     fs.readdirSync(componentPath).forEach(function (dir) {
         fs.readFile('./component/' + dir + '/package.json', 'utf8', function (err, data) {
             if (err) {
-                return emitter.emit('error', err);
+                return self.emit('error', err);
             } else {
                 var infor = JSON.parse(data);
                 if (infor['main'] != null) {
                     var pathFile = './component/' + dir + '/' + infor['main'];
-                    emitter.emit('found', pathFile);
+                    self.emit('found', pathFile);
                 } else {
-                    emitter.emit('fileNotFound');
+                    self.emit('fileNotFound');
                 }
-                //require('./component/' + dir + '/' + infor['main']);
             }
         })
     })
-    return emitter;
+    return this;
 }
 
-findFile()
+var findFindObject = new FindFile();
+
+findFindObject
+    .findFile()
     .on('found', function (pathFile) {
         require(pathFile);
     })
-    .on('fileNotFound', function() {
+    .on('fileNotFound', function () {
         console.log("File not found for main in the package.json");
     })
-    .on('error', function() {
+    .on('error', function () {
         console.log("Error while loading component!!!");
     })
