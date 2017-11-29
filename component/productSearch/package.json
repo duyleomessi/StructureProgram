@@ -2,7 +2,7 @@
   "name": "sellingwebsite",
   "version": "0.1.0",
   "description": "Ecommerce app Using the MongoDB driver and Express",
-  "main": "product.js",
+  "main": "productSearch.js",
   "dependencies": {
     "async": "^2.1.4",
     "bcrypt-nodejs": "0.0.3",

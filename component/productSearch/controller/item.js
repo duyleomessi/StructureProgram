@@ -2,10 +2,11 @@ var express = require('express');
 var itemRoute = express.Router();
 var Item = require('../models/items');
 
+var itemProcess = require('./singleton/itemProcess');
 
 itemRoute.get('/:itemId', function (req, res, next) {
     var itemId = req.params.itemId;
-    Item.getItem(itemId, function (item) {
+    itemProcess.getItem(itemId, function (item) {
         if (item === null) {
             res.status(400).send('Items not found');
             return;
