@@ -1,5 +1,4 @@
 module.exports = {
-    dburl: 'mongodb://localhost:27017/sp',
-    port: 3001,
+    dburl: 'mongodb://duyle:1234@ds123956.mlab.com:23956/sp',
     secretKey: 'this is a secret key'
 }

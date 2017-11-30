@@ -15,7 +15,7 @@ var express = require('express'),
 var stripe = require('stripe')('sk_test_eBc69WlaOxykHBs34Rfqietx');
 
 
-var secret = require('./config/secret');
+var secret = require('../../config/secret');
 var passportConf = require('./config/passport');
 
 // Set up express
