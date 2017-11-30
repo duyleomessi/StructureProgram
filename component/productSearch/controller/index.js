@@ -22,19 +22,15 @@ indexRoute.get('/', function (req, res, next) {
 
     async.series([
         function (callback) {
-            console.log("function 1");
             itemProcess.getCategories(callback)
         },
         function (callback) {
-            console.log("function 2");
             itemProcess.getItems(category, page, ITEMS_PER_PAGE, callback)
         },
         function (callback) {
-            console.log("function 3");
             itemProcess.getNumItems(category, callback)
         }
     ], function (err, result) {
-        console.log("Fuck");
         if (err) {
             console.log(err);
         } else {
