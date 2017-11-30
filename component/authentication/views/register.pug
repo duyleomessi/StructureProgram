@@ -7,11 +7,11 @@ block content
                 svg(viewbox='0 0 32 32')
                     g(filter='')
                         use(xlink:href='#git')
-        if messages.emailError 
+        if messages 
             .alert.alert-danger.alert-dismissible(role='alert')
                 button.close(type='button', data-dismiss='alert', aria-label='Close')
                     span(aria-hidden='true') &times;
-                strong #{messages.emailError}
+                strong #{messages}
         .panel.panel-default
             .panel-heading
                 .panel-title.text-center IT BOOK

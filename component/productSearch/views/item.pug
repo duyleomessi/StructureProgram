@@ -21,7 +21,7 @@ block content
                     else
                         p.pull-right #{ numReviews } reviews
                     p
-                        - for(var i = 0; i < 6; i++)
+                        - for(var i = 0; i < 5; i++)
                             if stars > i
                                 span.glyphicon.glyphicon-star 
                             else
@@ -45,8 +45,8 @@ block content
                             h4.media-heading #{ review.name }
                                 small #{ review.date | date }
                             div.ratings(style="padding-left: 0")
-                                - for(var i = 0; i < 6; i++)
-                                    if stars > i
+                                - for(var i = 0; i < 5; i++)
+                                    if review.stars > i
                                         span.glyphicon.glyphicon-star 
                                     else
                                         span.glyphicon.glyphicon-star-empty

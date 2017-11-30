@@ -45,12 +45,16 @@ itemRoute.post("/:itemId/reviews", function(req, res, next) {
     var itemId = req.params.itemId;
     var review = req.body.review;
     var name = req.body.name;
+    if (!name) {
+        name = "Anomynous";
+    }
     var stars = req.body.stars;
+    console.log("stars", stars);
 
     Item.addReview(itemId, review, name, stars, function() {
         res.redirect('/item/' + itemId);
-    })
+    });
 
-})
+});
 
 module.exports = itemRoute;

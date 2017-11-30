@@ -105,28 +105,3 @@ module.exports.addReview = function (itemId, review, name, stars, callback) {
         })
 }
 
-
-module.exports.searchItems = function (queryString, page, ITEMS_PER_PAGE, callback) {
-    Item
-        .find({
-            $text: {
-                $search: queryString,
-                $caseSensitive: false
-            }
-        })
-        .sort({
-            _id: 1
-        })
-        .skip(page * ITEMS_PER_PAGE)
-        .limit(ITEMS_PER_PAGE)
-        .exec(function (err, result) {
-            assert.equal(err, null);
-            if (!result) {
-                console.log('error result');
-                return;
-            } else {
-                callback(result);
-            }
-
-        })
-}

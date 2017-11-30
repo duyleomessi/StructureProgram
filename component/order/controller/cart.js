@@ -22,11 +22,14 @@ cartRoute.get('/', function (req, res, next) {
             total: total,
             updated: false
         });
-    })
+    });
 });
 
 
 cartRoute.post('/items/:itemId', function (req, res, next) {
+    if (!req.user) {
+        res.redirect('/user/login');
+    }
     var userId = req.user._id;
     var itemId = req.params.itemId;
 

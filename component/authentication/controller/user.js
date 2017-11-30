@@ -8,12 +8,13 @@ var User = require('../models/user');
 //var Cart = require('../../order/models/cart');
 var Cart = require('../../productSearch/models/cart');
 
+
 userRoute.get('/', function (req, res, next) {
     res.redirect('/user/register');
 });
 
 userRoute.get('/register', function (req, res, next) {
-    res.render('register');
+    res.render('register', {messages: false});
 });
 
 userRoute.post('/register', function (req, res, next) {
@@ -34,8 +35,9 @@ userRoute.post('/register', function (req, res, next) {
                     if (err) return next(err);
                     if (result) {
                         req.flash('emailError', 'The email is alredy exists');
+                        console.log("req.flash: ", req.flash('emailError'));
                         //console.log('emailError', req.flash('emailError').length );
-                        return res.redirect('/user/register');
+                        return res.render('register', { messages: 'The email is already exists'});
                     } else {
                         newUser.save(function (err, user) {
                             if (err) return next(err);
