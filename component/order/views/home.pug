@@ -1,0 +1,62 @@
+extends includes/layout.pug
+
+block breadcrumb
+    .row
+        .col-sm-12
+            ol.breadcrumb
+                li
+                    a(href="/") Home
+                li.active #{ category_param }
+
+
+block content
+    .row
+        .col-sm-2
+            .list-group
+                each category in categories
+                    if category_param == category._id
+                        a(href="/?category=" + category._id).list-group-item.active
+                            span.badge #{ category.num }
+                            = category._id
+                    else
+                        a(href="/?category=" + category._id).list-group-item.inactive
+                            span.badge #{ category.num }
+                            = category._id
+
+        .col-sm-10
+            each item in items
+                .row
+                    .col-sm-7
+                        a(href="/item/" + item._id)
+                            img.img-responsive(src="/static" + item.img_url)
+                    .col-sm-5
+                        h3
+                            a(href="/item/" + item._id) #{ item.title }
+                        h4 #{ item.slogan }
+                        p #{ item.description }
+                        a.btn.btn-primary(href="/item/" + item._id) View product 
+                            span.glyphicon.glyphicon-chevron-right
+                hr 
+
+            .row.text-center
+                .col-sm-12
+                    ul.pagination
+                        if useRangeBasedPagination == false
+                            - for(var j = 0; j  < pages; j++) 
+                                if page == j
+                                    li.active
+                                        a(href="/?page=" + j + "&category=" + category_param) #{j + 1}
+                                else 
+                                    li.inactive
+                                        a(href="/?page=" + j + "&category=" + category_param) #{j + 1}
+
+                    if !useRangeBasedPagination
+                        div(style="text-align: center") #{ itemCount } Products
+
+block footer
+    hr
+    footer
+        .row
+            .col-sm-12
+                p Best Selling
+

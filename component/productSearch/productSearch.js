@@ -15,10 +15,11 @@ var express = require('express'),
 var stripe = require('stripe')('sk_test_eBc69WlaOxykHBs34Rfqietx');
 
 
-var secret = require('../../config/secret');
+var secret = require('./config/secret');
+var passportConf = require('./config/passport');
 
 // Set up express
-app = express();
+var app = express();
 app.set('view engine', 'pug');
 app.set('views', __dirname + '/views');
 app.use('/static', express.static(__dirname + '/static'));
@@ -66,6 +67,8 @@ app.use('/search', searchRoute);
 
 //app.use('/user', userRoute);
 
-app.listen(8081, function () {
-    console.log('server listen at port ', 8081);
-})
+// app.listen(8081, function () {
+//     console.log('server listen at port ', 8081);
+// })
+
+module.exports = app;

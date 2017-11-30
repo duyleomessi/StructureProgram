@@ -1,7 +1,7 @@
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
-var User = require('../models/user');
+var User = require('../../authentication/models/user');
 
 // serialize and deserialize
 passport.serializeUser(function (user, done) {
@@ -20,16 +20,11 @@ passport.use('local-login', new LocalStrategy({
     passwordField: 'password',
     passReqToCallback: true
 }, function (req, email, password, done) {
-    User.findOne({
-        email: email
-    }, function (err, user) {
+    User.findOne({ email: email }, function (err, user) {
         console.log('user: ', user);
         if (err) return done(err);
 
-        if (!user) {
-            console.log("User doesnt available");
-            return done(null, false, req.flash('userNotExist', 'Email is not register'));
-        }
+        if (!user) return done(null, false, req.flash('userNotExist', 'Email is not register'));
 
         if (!user.comparePassword(password)) return done(null, false, req.flash('passwordIncorrect', "The password is incorrect"));
 
@@ -44,5 +39,6 @@ passport.use('local-login', new LocalStrategy({
 module.exports.isAuthenticated = function (req, res, next) {
     if (req.isAuthenticated()) {
         return next();
-    } else res.redirect('/user/login');
+    }
+    else res.redirect('/user/login');
 }

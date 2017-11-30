@@ -20,7 +20,7 @@ var stripe = require('stripe')('sk_test_eBc69WlaOxykHBs34Rfqietx');
 var secret = require('../../config/secret');
 
 // Set up express
-app = express();
+var app = express();
 app.set('view engine', 'pug');
 app.set('views', __dirname + '/views');
 app.use('/static', express.static(__dirname + '/static'));
@@ -56,9 +56,9 @@ mongoose.connect(secret.dburl, function(err) {
 var userRoute = require('./controller/user');
 
 app.use('/', userRoute);
-app.use('/user', userRoute);
 
-app.listen(8080, function() {
-    console.log('server listen at port ', 8080);
-})
+// app.listen(8080, function() {
+//     console.log('server listen at port ', 8080);
+// })
 
+module.exports = app;

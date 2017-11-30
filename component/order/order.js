@@ -16,9 +16,10 @@ var stripe = require('stripe')('sk_test_eBc69WlaOxykHBs34Rfqietx');
 
 
 var secret = require('../../config/secret');
+var passportConf = require('./config/passport');
 
 // Set up express
-app = express();
+var app = express();
 app.set('view engine', 'pug');
 app.set('views', __dirname + '/views');
 app.use('/static', express.static(__dirname + '/static'));
@@ -59,13 +60,17 @@ mongoose.connect(secret.dburl, function (err) {
 // var itemRoute = require('./controller/item');
 // var searchRoute = require('./controller/search');
 
+var cartRoute = require('./controller/cart');
 
+app.use('/', cartRoute);
 // app.use('/', indexRoute);
 // app.use('/item', itemRoute);
 // app.use('/search', searchRoute);
 
 //app.use('/user', userRoute);
 
-app.listen(8082, function () {
-    console.log('server listen at port ', 8082);
-})
+// app.listen(8082, function () {
+//     console.log('server listen at port ', 8082);
+// })
+
+module.exports = app;

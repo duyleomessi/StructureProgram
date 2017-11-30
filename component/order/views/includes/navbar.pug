@@ -17,12 +17,12 @@ nav.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
                         a(href='/user/login') Login
                 else
                     li
-                        a(href='/user/logout') Logout
+                        a(href='/user//logout') Logout
             .collapse.navbar-collapse
-                //- form.navbar-form.navbar-right(role='search', action='/search')
-                //-     .form-group
-                //-         input.form-control(type='text', name='query', placeholder='Search')
-                //-     |  
+                form.navbar-form.navbar-right(role='search', action='/search')
+                    .form-group
+                        input.form-control(type='text', name='query', placeholder='Search')
+                    |  
                     //- button.btn.btn-default(type='submit') Submit
                     |  
                     if (user)
