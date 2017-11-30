@@ -59,11 +59,13 @@ mongoose.connect(secret.dburl, function (err) {
 var indexRoute = require('./controller/index');
 var itemRoute = require('./controller/item'); 
 var searchRoute = require('./controller/search');
+var itemApi = require('./controller/api');
 //var userRoute = require('./controller/user');
 
 app.use('/', indexRoute);
 app.use('/item', itemRoute);
 app.use('/search', searchRoute);
+app.use('/api', itemApi);
 
 //app.use('/user', userRoute);
 

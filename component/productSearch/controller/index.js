@@ -10,8 +10,6 @@ var Item = require('../models/items');
 
 var itemProcess = require('./singleton/itemProcess');
 
-
-
 /* GET home page. */
 indexRoute.get('/', function (req, res, next) {
     if (req.user)
