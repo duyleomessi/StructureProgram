@@ -11,7 +11,7 @@ body
                             .display-td
                                 img.img-responsive.pull-right(src='http://i76.imgup.net/accepted_c22e0.png')
                     .panel-body
-                        form#payment-form(role='form', method='POST', action='/payment')
+                        form#payment-form(role='form', method='POST', action='/cart/payment')
                             input(type='hidden', name='stripeMoney', value=total)
                             .row
                                 .col-xs-12
@@ -32,7 +32,7 @@ body
                                         input.form-control(type='tel', name='cardExpiry', placeholder='MM / YY', autocomplete='cc-exp', required='')
                                 .col-xs-5.col-sm-5.pull-right
                                     .form-group
-                                        label(for='cardCVC') CV CODE
+                                        label(for='cardCVC') CV CODES
                                         |  
                                         input.form-control(type='tel', name='cardCVC', placeholder='CVC', autocomplete='cc-csc', required='')
                             .row

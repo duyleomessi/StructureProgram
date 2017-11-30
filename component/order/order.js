@@ -61,8 +61,10 @@ mongoose.connect(secret.dburl, function (err) {
 // var searchRoute = require('./controller/search');
 
 var cartRoute = require('./controller/cart');
+var paymentRoute = require('./controller/payment');
 
 app.use('/', cartRoute);
+app.use('/payment', paymentRoute);
 // app.use('/', indexRoute);
 // app.use('/item', itemRoute);
 // app.use('/search', searchRoute);
