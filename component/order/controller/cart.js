@@ -2,8 +2,8 @@ var express = require('express');
 var cartRoute = express.Router();
 var async = require('async');
 
-var Cart = require('../models/cart');
-
+//var Cart = require('../models/cart');
+var Cart = require('../../productSearch/models/cart');
 
 function cartTotal(userCart) {
     var total = 0;

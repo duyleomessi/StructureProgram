@@ -5,7 +5,8 @@ var passportConf = require('../config/passport');
 var async = require('async');
 
 var User = require('../models/user');
-var Cart = require('../../order/models/cart');
+//var Cart = require('../../order/models/cart');
+var Cart = require('../../productSearch/models/cart');
 
 userRoute.get('/', function (req, res, next) {
     res.redirect('/user/register');
