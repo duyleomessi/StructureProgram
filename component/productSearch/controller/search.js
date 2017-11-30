@@ -1,7 +1,7 @@
 var express = require('express');
 var searchRoute = express.Router();
 
-var Item = require('../models/items');
+var Item = require('./singleton/itemProcess');
 
 searchRoute.get('/', function (req, res, next) {
     var queryString = req.query.query;

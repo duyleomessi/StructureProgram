@@ -8,10 +8,10 @@ var itemProcess = function itemProcess() {
             num: {
                 $sum: 1
             }
-        }
+        };
         var sort = {
             _id: 1
-        }
+        };
 
         Item.aggregate([{
                 $group: group
@@ -31,10 +31,10 @@ var itemProcess = function itemProcess() {
             } else {
                 result.forEach(function (category) {
                     all.num += category.num;
-                })
+                });
                 var categories = result;
                 categories.unshift(all);
-                callback(null,categories);
+                callback(null, categories);
             }
         });
     };
@@ -45,7 +45,7 @@ var itemProcess = function itemProcess() {
         if (category !== 'All') {
             query = {
                 category: category
-            }
+            };
         }
 
         var pageItems = [];
@@ -64,18 +64,18 @@ var itemProcess = function itemProcess() {
                 } else {
                     result.forEach(function (item) {
                         pageItems.push(item);
-                    })
-                    callback(null,pageItems);
+                    });
+                    callback(null, pageItems);
                 }
-            })
-    }
+            });
+    };
 
     this.getNumItems = function (category, callback) {
         var query = {};
         if (category !== 'All') {
             query = {
                 category: category
-            }
+            };
         }
 
         Item.find(query, function (err, result) {
@@ -84,9 +84,9 @@ var itemProcess = function itemProcess() {
                 console.log('Result is empty or not exist: ', result);
             } else {
                 var numItems = result.length;
-                callback(null,numItems);
+                callback(null, numItems);
             }
-        })
+        });
     };
 
     this.getItem = function (itemId, callback) {
@@ -98,8 +98,8 @@ var itemProcess = function itemProcess() {
                 } else {
                     callback(result);
                 }
-            })
-    }
+            });
+    };
 
     this.getNumPage = function (queryString, callback) {
         Item
@@ -118,14 +118,38 @@ var itemProcess = function itemProcess() {
                     var numItems = result.length;
                     callback(numItems);
                 }
-            })
-    }
+            });
+    };
 
+    this.searchItems = function (queryString, page, ITEMS_PER_PAGE, callback) {
+        Item
+            .find({
+                $text: {
+                    $search: queryString,
+                    $caseSensitive: false
+                }
+            })
+            .sort({
+                _id: 1
+            })
+            .skip(page * ITEMS_PER_PAGE)
+            .limit(ITEMS_PER_PAGE)
+            .exec(function (err, result) {
+                assert.equal(err, null);
+                if (!result) {
+                    console.log('error result');
+                    return;
+                } else {
+                    callback(result);
+                }
+
+            });
+    };
 };
 
 itemProcess.instance = null;
-itemProcess.getInstance = function() {
-    if(this.instance === null) {
+itemProcess.getInstance = function () {
+    if (this.instance === null) {
         this.instance = new itemProcess();
     }
     return this.instance;
